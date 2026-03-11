@@ -9,7 +9,7 @@ TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 SUPABASE_URL = os.environ.get('SUPABASE_URL')
 SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
 
-bot = telebot.TeleBot(TELEGRAM_TOKEN)
+bot = telebot.TeleBot(TELEGRAM_TOKEN, threaded=False)
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @app.route('/', methods=['GET'])
