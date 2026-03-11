@@ -59,3 +59,4 @@ def handle_message(message):
             bot.reply_to(message, "❌ ပုံစံမှားနေပါတယ်။ ကော်မာ (,) ခံပြီး မှန်ကန်စွာ ရိုက်ထည့်ပါ။\nဥပမာ: Na dam hia?, နေကောင်းလား?")
     except Exception as e:
         bot.reply_to(message, f"⚠️ Error ဖြစ်နေပါတယ်: {str(e)}")
+# Update keys
