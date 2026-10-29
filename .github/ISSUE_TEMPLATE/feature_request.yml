@@ -1,0 +1,22 @@
+name: Feature request
+description: Suggest a community-focused improvement
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the use case, ideally with fictional examples.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+    validations:
+      required: true
+  - type: textarea
+    id: considerations
+    attributes:
+      label: Privacy, security, or compatibility considerations
+      description: Note any migration or data collection implications.
