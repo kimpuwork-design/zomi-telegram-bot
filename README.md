@@ -75,7 +75,27 @@ Dependencies are pinned in [`requirements.txt`](requirements.txt), and Vercel ro
 
 6. Deploy the Flask application (the repository includes Vercel routing to `/api/index`) and configure the Telegram webhook URL for your deployment.
 
-**Security:** Never commit tokens, service-role keys, database credentials, or contributor data. Keep all secrets in deployment environment variables. The existing implementation is a prototype: review webhook authentication, input validation, rate limiting, database access policies, and error disclosure before using it in a sensitive or large-scale setting.
+**Security:** Never commit tokens, service-role keys, database credentials, or contributor data. Keep all secrets in deployment environment variables. This remains an early-stage project; review rate limiting, database access policies, and privacy before using it with sensitive or large-scale data.
+
+### Optional Telegram webhook authentication (proposed change)
+
+The security hardening branch adds support for verifying Telegram's `X-Telegram-Bot-Api-Secret-Token` header. It is **disabled until configured**.
+
+To enable it safely, coordinate both sides of the integration:
+
+1. Choose a strong random secret (Telegram requires a token using `A-Z`, `a-z`, `0-9`, `_`, or `-`, 1–256 characters).
+2. Configure `TELEGRAM_WEBHOOK_SECRET` as a secure Vercel environment variable.
+3. Register the **same** value with Telegram's `setWebhook` using its `secret_token` parameter, timed with deployment.
+4. Confirm valid updates are being processed, and unauthorized POSTs are rejected with 403.
+5. Keep the webhook setting and deployment environment synchronized during rotations.
+
+**Important:** Deploying the configured secret before updating Telegram's webhook will reject legitimate updates. This feature does not authenticate requests while `TELEGRAM_WEBHOOK_SECRET` is unset. See [SECURITY.md](SECURITY.md) for reporting and operations guidance.
+
+## Development checks
+
+Install test dependencies with `python -m pip install -r requirements.txt pytest`, then run `python -m pytest -q`. The tests use mocked Telegram and Supabase modules, and the GitHub Actions CI workflow needs no production credentials.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Data and privacy
 
