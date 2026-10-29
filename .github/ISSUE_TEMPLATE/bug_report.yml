@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a reproducible defect (do not include secrets or private data)
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "For potential vulnerabilities or leaked credentials, follow SECURITY.md instead of filing a public issue."
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+      description: Describe the observed behavior without personal or secret data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Use synthetic example messages, never real user submissions.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "e.g. Python 3.11, local tests / Vercel"
